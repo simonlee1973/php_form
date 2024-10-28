@@ -32,34 +32,58 @@
     
 
 <?php
+
+if (isset($_GET['month']) && isset($_GET['year'])) {
+    $currentMonth = (int)$_GET['month'];
+    $currentYear = (int)$_GET['year'];
+    if($currentMonth>12)
+    {
+        $currentMonth-=12;
+        $currentYear++;
+
+    }
+    else if($currentMonth<1)
+    {
+        $currentMonth+=12;
+        $currentYear--;
+
+    }
+        
+
+
+    $fday_mon=new Datetime("$currentYear-$currentMonth-1");
+    $today=new Datetime();
     
+} else {
+    $fday_mon=new Datetime('first day of this month');
+    $today=new Datetime();
+}
+    
+    date_default_timezone_set('Asia/Taipei');
     echo "<table>";
     echo "<tr>";
     echo "<td> 日 </td><td> 一 </td><td> 二 </td><td> 三 </td><td> 四 </td><td> 五 </td><td> 六 </td>";
     echo "</tr>";
-    $fday_mon=new Datetime('first day of this month');
-    $today=new Datetime();
 
-    date_default_timezone_set('Asia/Taipei');
+        
+   // $fday_mon=new Datetime('first day of this month');
+   // $today=new Datetime();
+
 
     // 獲取當前月份和年份
-    if (isset($_GET['month']) && isset($_GET['year'])) {
-        $currentMonth = (int)$_GET['month'];
-        $currentYear = (int)$_GET['year'];
-    } else {
-        $currentMonth = date('n'); // 當前月份
-        $currentYear = date('Y');   // 當前年份
-    }
+
 
     $run_day =clone $fday_mon; 
-    $currentYear=$run_day->format('Y');
-    $currentMonth=$run_day->format('n');
-    
+   
 
     ?>    
     <h1><?php echo $currentYear . '年' . $currentMonth . '月'; ?></h1>
-    <a href="?month=<?php echo $currentMonth - 1; ?>&year=<?php echo $currentYear; ?>">上個月 </a>
-    <a href="?month=<?php echo $currentMonth + 1; ?>&year=<?php echo $currentYear; ?>">下個月 </a>
+    <!-- <a href="calendat2.php?month=1">上個月</a>
+    <a href="calendat2.php?month=-1">上個月</a> -->
+    <a href="calendar2.php?month=<?php echo $currentMonth ; ?>&year=<?php echo $currentYear-1; ?>">前一年 </a>        
+    <a href="calendar2.php?month=<?php echo $currentMonth - 1; ?>&year=<?php echo $currentYear; ?>">上個月 </a>
+    <a href="calendar2.php?month=<?php echo $currentMonth + 1; ?>&year=<?php echo $currentYear; ?>">下個月 </a>
+    <a href="calendar2.php?month=<?php echo $currentMonth ; ?>&year=<?php echo $currentYear+1; ?>">下一年 </a>    
 
     <?php
 

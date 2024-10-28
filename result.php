@@ -18,7 +18,7 @@
 <?php
         
         if($BMI<18.5)
-            $result="太輕";
+            $result=" 太輕";
         else if($BMI<24)
             $result="正常";
         else if($BMI<27)

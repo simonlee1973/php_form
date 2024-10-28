@@ -7,12 +7,40 @@
 </head>
 <body>
     <h1>BMI 結果</h1>
-<div>你的身高:<?=$_GET['height'];?> 公分</div>
-<div>你的體重:<?=$_GET['weight'];?> 公git 斤</div>
+
+
+
+
 <?php
-    $BMI=round($_GET['weight']*10000/($_GET['height'] *$_GET['height']),2);
+
+
+if ($_SERVER["REQUEST_METHOD"] == "POST")
+{
+    $H=$_POST['height'];
+    $W=$_POST['weight'];
+        
+}
+else if ($_SERVER["REQUEST_METHOD"] == "GET")
+{
+
+    
+    $H=$_GET['height'];
+    $W=$_GET['weight'];
+
+    
+
+}
+else
+{
+    echo"資料有問題";
+    exit();
+}
+
+$BMI=round($W*10000/($W*$W));    
 ?>
 
+<div>你的身高:<?=$H;?> 公分</div>
+<div>你的體重:<?=$W;?> 公斤</div>
 
 <div>你BMI 為:<?=$BMI; ?> </div>
 <?php
@@ -35,7 +63,10 @@
     
     
 </div>
-<div> <a href="index1.php">重首頁/重新輸入</a> 
+
+<div> 
+    <a href="index.php?bmi=<?=$bmi;?>">重首頁/重新量測</a>
+    <!-- <a href="index1.php ">重首頁/重新輸入</a>  -->
       </div>
 </body>
 

@@ -65,8 +65,8 @@ $BMI=round($W*10000/($W*$W));
 </div>
 
 <div> 
-    <a href="index.php?bmi=<?=$bmi;?>">重首頁/重新量測</a>
-    <!-- <a href="index1.php ">重首頁/重新輸入</a>  -->
+    <a href="bmi.php?bmi=<?=$BMI;?>">重首頁/重新量測</a>
+       <!-- <a href="index1.php ">重首頁/重新輸入</a>  -->
       </div>
 </body>
 

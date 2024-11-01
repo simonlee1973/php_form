@@ -1,17 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
 <?php
-$url = 'https://www.dcn.com.tw/';
+    
 
-$ch = curl_init();
-curl_setopt($ch, CURLOPT_URL, $url);
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3');
+    $html = '<html><body><h1>這是標題</h1><p>這是一段文字。</p></body></html>';
 
-$content = curl_exec($ch);
-curl_close($ch);
-
-if ($content !== false) {
-    echo $content;
-} else {
-    echo "無法抓取內容";
-}
-?>
+    $dom = new DOMDocument;
+    libxml_use_internal_errors(true); // 避免解析錯誤的警告
+    $dom->loadHTML($html);
+    libxml_clear_errors();
+    
+    $xpath = new DOMXPath($dom);
+    
+    // 提取 <h1> 標籤的內容
+    $title = $xpath->query('//h1')->item(0)->nodeValue;
+    
+    echo "標題: " . $title; // 輸出: 標題: 這是標題
+?>    
+</body>
+</html>

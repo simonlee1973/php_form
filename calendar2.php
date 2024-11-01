@@ -12,11 +12,11 @@
     <style>
         table{
             border-collapse:collapse;
-            background:<?=$randomColor?>;
+            /* background:<?=$randomColor?>; */
         }
         td{
             border: 1px solid #333;
-            text-align:center;
+            text-align:center;git 
             padding:5px 10px;
             width:120px;
             height:50px;
@@ -188,7 +188,8 @@ if (isset($_GET['month']) && isset($_GET['year'])) {
                 if ($cells->length >= 5) {
                     // 如果第一個 <td> 是 "name"，則獲取第二個 <td>
                     if ($cells->item(0)->nodeValue === $taiwan_date) {
-                        $nameValue = $cells->item(1)->nodeValue;
+                        $idValue = $cells->item(1)->nodeValue;
+                        if(strlen($idValue)==4)
                         //echo 'ID: ' . $cells->item(1)->nodeValue."<br>";
                         echo $cells->item(2)->nodeValue."<br>";
                     }
@@ -205,9 +206,9 @@ if (isset($_GET['month']) && isset($_GET['year'])) {
 
     }
     echo "</table>";
-    echo '<pre> 111';
-    print_r ($response)."<br>";
-    echo '</pre>';
+    //echo '<pre> 111';
+    //print_r ($response)."<br>";
+    //echo '</pre>';
 ?>
 
 

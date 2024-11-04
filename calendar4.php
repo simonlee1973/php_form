@@ -7,14 +7,18 @@
     <title>Document</title>
     <style>
         table {
-            border-collapse: collapse;
+            border-collapse: collapse;   
+            
 
         }
         td{
-                       
+            position: relative; /* 使子元素可以使用絕對定位 */           
             border: 1px solid #333;            
-            padding: 1px 1x;
-            vertical-align: top;            
+            padding: 1px;
+            vertical-align: top;   
+            width: 220px; /* 固定宽度 */
+                        
+     
 
         }
         
@@ -24,6 +28,7 @@
             font-weight: bold;
             text-align:center;
             font-size: 24px;
+            padding: 5px; /* 增加內邊距 */
              
             
 
@@ -36,27 +41,31 @@
             font-weight: bold;
             text-align:center;
             font-size: 24px;
+
+            padding: 5px; /* 增加內邊距 */
              
         }        
                     
 
 
-        .holi_day{
-            
+        .holi_day{            
 
-            width: 150px; /* 固定宽度 */
-            height: 100px; /* 固定高度 */
+ 
+            height: 130px; /* 固定高度 */
             color:red;
+
+
 
             
 
         }
         .wrork_day{
             
-            width: 150px; /* 固定宽度 */
-            height: 100px; /* 固定高度 */
+
+            height: 130px; /* 固定高度 */
             color:black;
-            vertical-align: bottom; 
+            
+
             
 
         }        
@@ -73,7 +82,7 @@
             font-weight: bold; /* 设置为粗体 */
             font-size: 12px; /* 设置字体大小为16像素 */
             color:black;
-            vertical-align: bottom; 
+ 
 
              
         }    
@@ -82,7 +91,7 @@
             font-weight: bold; /* 设置为粗体 */
             font-size: 12px; /* 设置字体大小为16像素 */
             color:red;
-            vertical-align: bottom; 
+
 
              
         }              
@@ -109,12 +118,13 @@
         .today {
             text-align: right;
             background: blue;
-            color: white
+            color: white;
             font-size: 20px;
  
         }
         .normal {
             text-align: right;
+            height: 130px; /* 固定高度 */
         }
     </style>
 </head>
@@ -328,13 +338,35 @@
                 $gday=($run_day->format("Y-m")!=$fday->format("Y-m"))?"gray ":"";
             else
                 $gday="";                
-            echo "<td class='".$tdhday."'>";            
+            //echo "<td class='".$tdhday."'>";  
+            echo "<td>";    
             echo "<div class='".$normalday.$gday.$hday.$tday."'>".$run_day->Format('j')."</div>";
 
             if(isset($spDate[$run_day->format("Y-m-d")]))
                 echo $spDate[$run_day->format("Y-m-d")];
             if(isset($spDate[$run_day->format("m-d")]))
                 echo $spDate[$run_day->format("m-d")];
+                if($taiwan_calendar==1)
+                {
+                    $dayOfYear = (int)$run_day->format('z');    
+                    if((($data_day[$dayOfYear]['isHoliday']===true)&&($data_day[$dayOfYear]['description'])))  
+                    {
+                        echo "<div class='"."taiwan_holiday"."'>";
+                        echo $data_day[$dayOfYear]['description'];
+                        echo "<div>";
+
+                    } 
+                        
+                    else if($data_day[$dayOfYear]['description']!="")
+                    {
+                        echo "<div class='"."taiwan_day"."'>";
+                        echo $data_day[$dayOfYear]['description'];
+                        echo "<div>";
+                    }
+
+
+               
+                }
 
                 if($lunar_calenadar==1)
                 {
@@ -381,18 +413,7 @@
                     
                 }                                
 
-                if($taiwan_calendar==1)
-                {
-                    $dayOfYear = (int)$run_day->format('z');    
-                    if((($data_day[$dayOfYear]['isHoliday']===true)&&($data_day[$dayOfYear]['description'])))   
-                        echo "<div class='"."taiwan_holiday"."'>";
-                    else
-                        echo "<div class='"."taiwan_day"."'>";
 
-
-                    echo $data_day[$dayOfYear]['description'];
-                    echo "<div>";
-                }
 
                 if($stock_run==1)
                 {
